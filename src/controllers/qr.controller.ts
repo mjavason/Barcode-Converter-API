@@ -26,6 +26,21 @@ class Controller {
     }
   }
 
+  // Returns a base64 string, that when passed as a src parameter to images, will display the qr code
+  async convertTextToString(req: Request, res: Response) {
+    const qrCodeText = req.body.text;
+    if (!qrCodeText) return BadRequestResponse(res, 'Invalid text');
+    try {
+      // Generate the QR code as a data URL
+      const qrCodeDataUrl = await qrCode.toDataURL(qrCodeText.toString());
+
+      return SuccessResponse(res, { image_src: `${qrCodeDataUrl}` });
+    } catch (error) {
+      logger.error('Error generating QR code:', error);
+      return InternalErrorResponse(res);
+    }
+  }
+
   async convertImage(req: Request, res: Response) {
     // Extract the file buffer and MIME type from the request
     const fileUploadBuffer: Buffer | undefined = req.file?.buffer;

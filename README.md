@@ -27,8 +27,22 @@ To use the Barcode Converter API:
    ```
 
 4. Set up your environment variables. Replace the placeholders with your actual values.
+   ```env
+   API_DOCUMENTATION_URL=doc.xxx.com
+   APP_NAME=BarcodeConverterApp
+   MAIL_ADDRESS=xxxx@mail.com
+   MAIL_PASSWORD=xxxx
+   SITE_LINK=xxxx
+   USERNAME=user@mail.com
+   ```
 
-5. Start the server:
+5. Build the application:
+
+   ```shell
+   npm run build
+   ```
+
+6. Start the server:
 
    ```shell
    npm start
@@ -36,18 +50,6 @@ To use the Barcode Converter API:
 
 The API will be accessible at `http://localhost:5000` by default.
 
-## Environment Variables
-
-Before running the API, make sure to set up the following environment variables in a `.env` file:
-
-```env
-API_DOCUMENTATION_URL=doc.xxx.com
-APP_NAME=BarcodeConverterApp
-MAIL_ADDRESS=xxxx@mail.com
-MAIL_PASSWORD=xxxx
-SITE_LINK=xxxx
-USERNAME=user@mail.com
-```
 
 ## Documentation
 
