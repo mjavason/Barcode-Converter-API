@@ -4,4 +4,4 @@
 // export { whatever } from './whatever';
 
 export { mailController } from './mail.controller';
-export { analyze } from './robot.controller';
+export { qrController } from './qr.controller';
