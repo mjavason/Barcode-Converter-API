@@ -7,13 +7,19 @@ const QrCodeReader = require('qrcode-reader');
 
 class Controller {
   async convertText(req: Request, res: Response) {
-    const qrCodeText = req.body.text;
+    const qrCodeText = req.query.text;
     if (!qrCodeText) return BadRequestResponse(res, 'Invalid text');
-    try {
-      // Generate the QR code as a data URL
-      const qrCodeDataUrl = await qrCode.toDataURL(qrCodeText.toString());
 
-      return SuccessResponse(res, { image_src: `${qrCodeDataUrl}` });
+    try {
+      // Generate the QR code as a buffer
+      const qrCodeBuffer = await qrCode.toBuffer(qrCodeText.toString());
+
+      // Set the response headers to indicate a downloadable image
+      res.setHeader('Content-Disposition', `attachment; filename="qrCode.png"`);
+      res.setHeader('Content-Type', 'image/png');
+
+      // Send the QR code image as a downloadable file
+      res.send(qrCodeBuffer);
     } catch (error) {
       logger.error('Error generating QR code:', error);
       return InternalErrorResponse(res);

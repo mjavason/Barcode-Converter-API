@@ -3,7 +3,7 @@ import { z } from 'zod';
 class Validation {
   // Validation schema for updating an existing convert
   convertText = {
-    body: z.object({
+    query: z.object({
       text: z.string(),
     }),
   };
